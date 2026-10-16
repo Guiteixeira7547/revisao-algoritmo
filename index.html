@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a1325">
+  <meta name="description" content="Missão Código: revisão interativa e autocorrigível de Lógica de Programação, Python, Portugol e GitHub.">
+  <title>Missão Código | Revisão de Lógica de Programação</title>
+  <style>
+    :root { color-scheme:dark; --bg:#0b1222; --panel:#121f35; --card:#17273f; --line:#2e425a; --text:#f2f7ff; --muted:#b5c5d9; --aqua:#6ae6d3; --blue:#7db2ff; --gold:#ffc975; --rose:#ff9ea6; --green:#7ef3b1; --shadow:0 18px 64px rgba(0,0,0,.23); }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 18% 0%,rgba(49,87,159,.24),transparent 42%),radial-gradient(ellipse at 90% 25%,rgba(29,129,120,.13),transparent 45%),var(--bg);color:var(--text);line-height:1.52}
+    button,input,select{font:inherit}
+    button{cursor:pointer}
+    button:disabled{cursor:not-allowed;opacity:.48}
+    a{color:var(--aqua)}
+    button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    .wrap{max-width:1120px;padding:24px 22px 85px;margin:auto;position:relative}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:0 0 20px}
+    .brand{display:flex;align-items:center;gap:13px;min-width:0}
+    .brand-mark{display:grid;place-items:center;width:46px;height:46px;flex:none;background:linear-gradient(135deg,#66e5d4,#83a7fb);border-radius:14px;color:#061321;font-size:21px;font-weight:1000;box-shadow:0 0 35px #65d7cf22}
+    .brand-title{font-weight:850;letter-spacing:.05em;font-size:1.03rem}
+    .brand-sub{font-size:.77rem;color:var(--muted)}
+    .top-info{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+    .chip{padding:7px 12px;border:1px solid #38516c;background:#15243a;border-radius:100px;color:var(--muted);font-size:.82rem;font-weight:650}
+    .chip strong{color:var(--text)}
+    .chip.live{color:#a0ffe1;border-color:#337b70;background:#12433b5c}
+    .hero{margin:32px 0 25px;display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:center}
+    .eyebrow{display:flex;align-items:center;gap:10px;color:var(--aqua);letter-spacing:.16em;text-transform:uppercase;font-size:.76rem;font-weight:850}
+    .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--aqua);box-shadow:0 0 12px var(--aqua)}
+    h1{font-size:clamp(2.6rem,6vw,5.1rem);line-height:1.03;margin:13px 0 17px;letter-spacing:-.06em}
+    h1 span{color:var(--aqua)}
+    h2{font-size:clamp(1.4rem,3vw,2.08rem);line-height:1.2;letter-spacing:-.035em;margin:10px 0 14px}
+    h3{font-size:1.1rem;margin:0 0 10px}
+    p{color:var(--muted);margin:8px 0 14px}
+    .hero-art{min-height:245px;border:1px solid #3e6475;border-radius:25px;background:radial-gradient(circle at 55% 45%,#29526e 0,#192d48 42%,#0e2036 78%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+    .hero-art:before{content:"";position:absolute;inset:22px;border:1px dashed #628b9966;border-radius:19px}
+    .hero-art:after{content:"0101 1010 0011 1100";position:absolute;bottom:17px;font-size:.66rem;letter-spacing:.35em;color:#b7e9e166}
+    .terminal{width:74%;max-width:290px;min-height:147px;background:#071422;border:2px solid #567d91;border-radius:16px;transform:rotate(-4deg);box-shadow:12px 16px 35px #0007;z-index:1;overflow:hidden}
+    .terminal-header{height:28px;background:#233c55;padding:10px;display:flex;gap:5px}
+    .terminal-header i{width:8px;height:8px;background:#ff9c9c;border-radius:50%}.terminal-header i:nth-child(2){background:#f9d881}.terminal-header i:nth-child(3){background:#8cedbd}
+    .terminal pre{font:700 .85rem/1.9 ui-monospace,monospace;color:#aef4dc;padding:10px 18px;margin:0}
+    .card{border:1px solid var(--line);border-radius:21px;background:linear-gradient(150deg,#16273f,#111f34);box-shadow:var(--shadow)}
+    .pad{padding:26px}
+    .button{border:1px solid transparent;background:linear-gradient(110deg,var(--aqua),#92dbf2);border-radius:13px;padding:13px 22px;color:#06242d;font-weight:850;min-height:48px;transition:transform .17s ease,filter .17s ease}
+    .button:not(:disabled):hover{transform:translateY(-2px);filter:brightness(1.07)}
+    .button.secondary{background:#192d49;color:var(--text);border-color:#4c6989}
+    .button.ghost{background:transparent;color:var(--muted);border-color:var(--line)}
+    .button.small{padding:7px 12px;min-height:34px;font-size:.85rem;border-radius:9px}
+    .button-row{display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-top:17px}
+    .field{display:flex;flex-direction:column;gap:8px;color:#dceaff;font-size:.88rem;font-weight:700}
+    .field input,.field select,.answer-input,.match-select{width:100%;background:#0c1a2e;border:1px solid #52718a;color:var(--text);border-radius:12px;padding:13px 14px;min-height:48px}
+    .field input::placeholder,.answer-input::placeholder{color:#89a0b5}
+    .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0 23px}
+    .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:23px 0}
+    .stat{border-radius:14px;padding:14px;background:#102138;border:1px solid #29415a}
+    .stat .big{font-size:1.9rem;font-weight:900;line-height:1.3;color:var(--aqua)}
+    .stat .small{font-size:.74rem;color:var(--muted)}
+    .stages{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}
+    .stage{border:1px solid #314861;border-radius:12px;padding:14px 11px;background:#13253a;min-height:106px}
+    .stage .num{font-size:.76rem;color:var(--aqua);font-weight:900;letter-spacing:.12em}
+    .stage .stage-title{font-size:.85rem;font-weight:750;margin:7px 0 0}
+    .stage .stage-count{font-size:.72rem;color:var(--muted)}
+    .stage.active{border-color:var(--aqua);box-shadow:inset 0 0 0 1px #6ae6d355;background:#173d42}
+    .stage.complete{border-color:#37665a;background:#13352d}
+    .stage.complete .num{color:var(--green)}
+    .muted-note{font-size:.82rem;color:var(--muted);margin-top:12px}
+    .notice{padding:12px 15px;border:1px solid #637048;background:#323c233d;color:#ecdda4;border-radius:12px;font-size:.83rem}
+    .hidden{display:none !important}
+    .quiz-head{display:flex;gap:16px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
+    .progressbar{height:11px;background:#091628;border:1px solid #304963;overflow:hidden;border-radius:99px;margin-top:19px}
+    .progressbar>div{height:100%;width:0%;background:linear-gradient(90deg,var(--aqua),var(--blue));transition:width .3s ease}
+    .qtag{display:inline-flex;gap:7px;align-items:center;color:var(--aqua);font-size:.81rem;font-weight:850;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}
+    .qprompt{font-size:clamp(1.18rem,2.6vw,1.52rem);font-weight:750;line-height:1.38;color:var(--text);margin:3px 0 17px}
+    .qhint{color:var(--muted);font-size:.84rem;margin:0 0 16px}
+    .choices{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    .choice{display:flex;align-items:flex-start;gap:12px;text-align:left;width:100%;padding:15px;background:#0d1e31;border:1px solid #3d5770;border-radius:13px;color:var(--text);min-height:60px;font-size:.97rem;line-height:1.45}
+    .choice:hover:not(:disabled),.choice.selected{background:#1e3d50;border-color:var(--aqua)}
+    .choice:disabled{opacity:1;cursor:default}
+    .choice.correct{border-color:#69d7a0;background:#174034}
+    .choice.wrong{border-color:#ef9b99;background:#4e2a32}
+    .choice-key{flex:0 0 29px;height:29px;border:1px solid #55748b;background:#1a354d;border-radius:8px;display:grid;place-items:center;font-weight:900;font-size:.83rem}
+    pre.code{font:500 .92rem/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;color:#ccebdc;margin:0 0 18px;white-space:pre-wrap;overflow-wrap:anywhere;padding:18px;background:#081727;border:1px solid #2e5364;border-radius:14px;tab-size:4}
+    pre.code .gap{background:#29466b;color:#ffdf94;padding:1px 6px;border:1px dashed #e8d08b;border-radius:4px}
+    .fill-wrap{max-width:370px}
+    .match-rows{display:grid;gap:11px}
+    .match-row{display:grid;grid-template-columns:minmax(160px,1fr) minmax(180px,1.2fr);align-items:center;gap:12px;padding:12px;border-radius:13px;background:#102137;border:1px solid #2d4560}
+    .match-left{font-weight:800}
+    .match-right{display:flex;gap:8px;align-items:center}
+    .match-mark{font-size:.9rem;flex:none}
+    .match-select{font-size:.85rem;line-height:1.35;min-width:0}
+    .reorder-list{display:grid;gap:9px}
+    .reorder-row{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid #38546d;background:#0d1e32;border-radius:12px}
+    .reorder-n{width:26px;flex:none;color:var(--aqua);font-weight:900}
+    .reorder-text{flex:1;min-width:0;font-size:.94rem;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+    .arrows{display:flex;gap:6px}
+    .arrows button{border:1px solid #55708b;border-radius:8px;background:#1c3954;color:var(--text);width:35px;height:35px;font-size:1rem}
+    .feedback{margin-top:20px;border:1px solid;border-radius:14px;padding:18px}
+    .feedback.good{border-color:#397b61;background:#153a32}.feedback.mid{border-color:#ab8551;background:#3b3123}.feedback.bad{border-color:#885052;background:#422a32}
+    .feedback-title{font-weight:900;font-size:1.08rem}.feedback p{color:#e2eaf6;font-size:.92rem;margin:7px 0 0}
+    .feedback .solution{margin-top:10px;color:#bfe5dc;font-size:.86rem;white-space:pre-wrap;overflow-wrap:anywhere}
+    .score-line{font-size:.83rem;color:var(--muted);margin-top:7px}
+    .endhero{text-align:center;padding:24px 6px 14px}
+    .result-medal{width:100px;height:100px;margin:0 auto 15px;border-radius:100%;display:grid;place-items:center;background:linear-gradient(140deg,#ecdba2,#ecad6d);box-shadow:0 0 0 9px #e4af5126;color:#32220d;font-size:2.8rem;font-weight:900}
+    .score-value{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:9px;line-height:1.12;margin:20px 0 7px}
+    .score-value #finalScore{font-size:clamp(3.1rem,8vw,5.2rem);font-weight:950;letter-spacing:-.06em;color:var(--aqua)}
+    .score-value .score-total{font-size:1.3rem;font-weight:750;color:var(--muted)}
+    .compare{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:22px 0}
+    .compare .stat{text-align:center}
+    .comp-bars{margin-top:18px;display:grid;gap:12px}
+    .barline{display:grid;grid-template-columns:155px 1fr 55px;align-items:center;gap:10px;font-size:.85rem}
+    .track{height:14px;background:#081726;border:1px solid #34516b;border-radius:99px;overflow:hidden}
+    .track>div{height:100%;border-radius:99px;background:var(--aqua)}
+    .track.fake>div{background:var(--gold)}
+    .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:20px}
+    .result-stage{padding:14px 15px;background:#0c1e30;border:1px solid #34506a;border-radius:13px}
+    .result-stage .caption{font-size:.79rem;color:var(--muted)}
+    .result-stage strong{font-size:.98rem}
+    .result-stage .mini-track{height:6px;margin-top:9px;background:#2c4259;border-radius:8px;overflow:hidden}
+    .result-stage .mini-track div{height:100%;background:var(--aqua)}
+    .footer{padding:27px 0 10px;border-top:1px solid var(--line);margin-top:38px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:.8rem}
+    .footer strong{color:var(--aqua)}
+    @media(max-width:770px){.hero,.intro-grid{grid-template-columns:1fr}.hero-art{min-height:175px}.hero{margin-top:22px}.stages{grid-template-columns:repeat(2,1fr)}.choices{grid-template-columns:1fr}.pad{padding:19px}.compare{grid-template-columns:1fr 1fr}.results-grid{grid-template-columns:1fr}.barline{grid-template-columns:98px 1fr 43px}.wrap{padding:17px 14px 55px}}
+    @media(max-width:520px){.stat-grid{grid-template-columns:repeat(3,1fr)}.stat{padding:10px}.stat .big{font-size:1.48rem}.compare{grid-template-columns:1fr}.match-row{grid-template-columns:1fr;gap:7px}.match-left{font-size:.91rem}.button{width:100%}.button-row{display:grid}.brand-title{font-size:.91rem}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+    @media print{body{background:white;color:black}.topbar,.button-row,.footer,.intro-grid,.stages,.hero-art,.notice{display:none!important}.card{box-shadow:none;border:1px solid #ccc;background:white;color:black}.wrap{max-width:800px}.score-value,.stat .big{color:#075d59}p,.muted-note{color:#333}.compare .stat,.result-stage{background:white;color:black}.result-stage .caption{color:#555}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">&lt;/&gt;</div><div><div class="brand-title">MISSÃO CÓDIGO</div><div class="brand-sub">Laboratório de Lógica de Programação</div></div></div>
+      <div class="top-info"><div class="chip">PROF. <strong>RODRIGO</strong></div><div class="chip live" id="headerStatus">● TREINAMENTO</div></div>
+    </header>
+
+    <section id="introScreen">
+      <div class="hero">
+        <div><div class="eyebrow"><span class="dot"></span> REVISÃO INTERATIVA · AULAS 01 A 10</div><h1>Você aceita a<br><span>missão?</span></h1><p>Da primeira variável ao Merge Sort: uma aventura com 40 desafios para testar tudo o que aprendemos. Errou? Receba a explicação e use isso para melhorar.</p><div class="button-row"><a class="button secondary" href="#prepare">VER COMO FUNCIONA ↓</a></div></div>
+        <div class="hero-art" aria-hidden="true"><div class="terminal"><div class="terminal-header"><i></i><i></i><i></i></div><pre>def evoluir(aluno):
+  while aprende:
+    aluno += pratica
+  return progresso
+
+&gt; pronto_para_jogar</pre></div></div>
+      </div>
+      <div class="stat-grid"><div class="stat"><div class="big">40</div><div class="small">desafios</div></div><div class="stat"><div class="big">10</div><div class="small">missões</div></div><div class="stat"><div class="big">1000</div><div class="small">pontos possíveis</div></div></div>
+      <div class="intro-grid" id="prepare">
+        <div class="card pad"><h2>Entre para a missão</h2><p>Informe apenas como você quer ser chamado. A atividade funciona no próprio navegador e não envia suas respostas para um servidor.</p><label class="field" for="studentName">Nome ou apelido<input id="studentName" type="text" maxlength="42" placeholder="Ex.: Alex" autocomplete="nickname"></label><div class="button-row"><button class="button" id="startBtn" type="button">COMEÇAR MISSÃO →</button><button class="button ghost hidden" id="resetIntroBtn" type="button">RECOMEÇAR DO ZERO</button></div><p class="muted-note" id="resumeMessage">Sua pontuação é salva neste navegador, para você poder continuar depois.</p></div>
+        <div class="card pad"><h2>Como funciona</h2><p>Você responderá questões de múltipla escolha, associação, organização de blocos e preenchimento de código. Cada resposta é corrigida na hora, com explicação.</p><p><strong style="color:var(--text)">No final:</strong> você verá pontos, aproveitamento, temas para revisar e uma posição em uma <strong>turma fictícia simulada</strong>.</p><div class="notice">A média e a classificação simuladas servem somente para motivar. Elas não representam as notas reais dos colegas.</div></div>
+      </div>
+      <h2>Seu mapa de missões</h2><div id="introStages" class="stages"></div>
+    </section>
+
+    <section id="quizScreen" class="hidden" aria-label="Desafios">
+      <div class="card pad" style="margin-top:30px">
+        <div class="quiz-head"><div><div class="eyebrow"><span class="dot"></span><span id="stageLabel">MISSÃO 01</span></div><h2 id="stageHeading"></h2><p id="questionCounter"></p></div><div class="top-info"><div class="chip">XP <strong id="currentXP">0</strong></div><div class="chip">ACERTOS <strong id="currentCorrect">0</strong></div><button class="button small ghost" id="homeBtn" type="button">PAUSAR</button></div></div>
+        <div class="progressbar" role="progressbar" aria-label="Progresso na revisão" aria-valuemin="0" aria-valuemax="40" aria-valuenow="0" id="progressTrack"><div id="progressFill"></div></div>
+        <p class="muted-note" id="questionCountNote"></p>
+      </div>
+      <div class="card pad" style="margin-top:18px" id="questionCard" aria-live="off">
+        <div class="qtag" id="questionType"></div><div class="qprompt" id="questionPrompt"></div>
+        <p class="qhint" id="questionHint"></p><div id="answerZone"></div>
+        <div id="feedbackZone" aria-live="polite"></div>
+        <div class="button-row"><button class="button" id="gradeBtn" type="button">CORRIGIR RESPOSTA ✓</button><button class="button secondary hidden" id="nextBtn" type="button">PRÓXIMO DESAFIO →</button></div>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="hidden" aria-label="Resultados">
+      <div class="card pad" style="margin-top:31px">
+        <div class="endhero"><div class="result-medal" aria-hidden="true">★</div><div class="eyebrow" style="justify-content:center"><span class="dot"></span> MISSÃO CONCLUÍDA</div><h1 style="font-size:clamp(2rem,5vw,3.5rem);margin-top:12px" id="finalGreeting"></h1><p id="finalMessage"></p><div class="score-value"><span id="finalScore">0</span><span class="score-total">/ 1000 XP</span></div><p id="finalPercent"></p></div>
+        <div class="compare"><div class="stat"><div class="small">Sua pontuação</div><div class="big" id="yourPercent">0%</div></div><div class="stat"><div class="small">Média simulada</div><div class="big" id="fakeAverage">0%</div></div><div class="stat"><div class="small">Posição fictícia</div><div class="big" id="fakeRank">0º</div></div></div>
+        <h2>Como foi sua missão?</h2><div class="comp-bars"><div class="barline"><strong>Você</strong><div class="track"><div id="yourBar"></div></div><strong id="yourBarLabel"></strong></div><div class="barline"><strong>Turma simulada</strong><div class="track fake"><div id="fakeBar"></div></div><strong id="fakeBarLabel"></strong></div></div>
+        <p class="notice" id="simulationExplanation" style="margin-top:19px">Classificação fictícia: não é um ranking real de estudantes, e nenhuma nota de outros alunos foi consultada.</p>
+        <h2 style="margin-top:27px">Desempenho por assunto</h2><div class="results-grid" id="stageResults"></div>
+        <div class="button-row"><button class="button" id="copyResultBtn" type="button">COPIAR COMPROVANTE</button><button class="button secondary" id="downloadResultBtn" type="button">BAIXAR RESULTADO .TXT</button><button class="button ghost" id="restartBtn" type="button">JOGAR NOVAMENTE</button></div><p class="muted-note" id="copyStatus" role="status"></p>
+      </div>
+    </section>
+
+    <footer class="footer"><span><strong>MISSÃO CÓDIGO</strong> · Revisão de Lógica de Programação · Aula 10</span><span>HTML + CSS + JavaScript · compatível com GitHub Pages · sem bibliotecas externas</span></footer>
+  </main>
+
+  <script>
+  'use strict';
+  // Projeto educacional estático. Para personalizar o questionário, edite QUESTION_BANK.
+  // Não há backend, ranking real nem envio de informações de alunos.
+  const MISSIONS = [
+    {title:'Algoritmos e fluxogramas', icon:'◇'},
+    {title:'Variáveis e operações', icon:'x'},
+    {title:'Decisões e lógica booleana', icon:'?'},
+    {title:'Estruturas de repetição', icon:'↻'},
+    {title:'Vetores e matrizes', icon:'[]'},
+    {title:'Funções e recursividade', icon:'ƒ'},
+    {title:'Filas e FIFO', icon:'⇥'},
+    {title:'Ordenação de dados', icon:'↕'},
+    {title:'Python e jogos', icon:'py'},
+    {title:'GitHub e APIs', icon:'git'}
+  ];
+  const QUESTION_BANK = [
+    // 01 ALGORITMOS E FLUXOGRAMAS
+    {stage:0,type:'choice',prompt:'Qual definição descreve melhor um algoritmo?',options:['Um programa escrito obrigatoriamente em Python.','Uma sequência finita de passos claros para resolver um problema.','Qualquer conjunto de palavras em inglês.','Um desenho que dispensa instruções.'],answer:1,explain:'Um algoritmo é uma sequência organizada e finita de instruções. Ele pode ser representado por texto, fluxograma, pseudocódigo ou código.'},
+    {stage:0,type:'match',prompt:'Associe cada símbolo de fluxograma à sua finalidade.',pairs:[['Losango','Decisão ou condição'],['Paralelogramo','Entrada ou saída de dados'],['Retângulo','Processamento ou operação']],explain:'O losango testa uma condição, o paralelogramo representa entrada ou saída e o retângulo indica processamento.'},
+    {stage:0,type:'order',prompt:'Organize as ações de um algoritmo de compra simples.',blocks:['Ler a quantidade e o preço.','Calcular quantidade × preço.','Mostrar o valor total.'],initial:[2,0,1],explain:'O fluxo esperado é entrada → processamento → saída. Primeiro recebemos os dados, depois calculamos e, por último, exibimos.'},
+    {stage:0,type:'choice',prompt:'Em um programa que calcula uma média, qual exemplo representa uma SAÍDA?',options:['Receber duas notas do aluno.','Armazenar as notas em variáveis.','Somar as notas e dividir por dois.','Exibir a média calculada na tela.'],answer:3,explain:'Entrada é obter dados; processamento é calcular; saída é apresentar o resultado.'},
+    // 02 VARIÁVEIS
+    {stage:1,type:'fill',prompt:'Complete o comando para converter a idade digitada em número inteiro.',code:'idade = {{gap}}(input("Digite sua idade: "))',answers:['int'],explain:'input() devolve um texto; int() converte o texto numérico em um número inteiro.'},
+    {stage:1,type:'choice',prompt:'Qual é o resultado da expressão em Python: 2 + 3 * 4 ?',options:['20','24','14','9'],answer:2,explain:'A multiplicação tem prioridade: 3 × 4 = 12 e depois 2 + 12 = 14.'},
+    {stage:1,type:'match',prompt:'Relacione o tipo de informação com o exemplo mais adequado.',pairs:[['Inteiro','Quantidade de alunos: 30'],['Real / decimal','Preço de um lanche: 12,50'],['Texto / cadeia','Nome de estudante: "Ana"']],explain:'Inteiros representam valores sem parte decimal; reais incluem frações; cadeias representam texto.'},
+    {stage:1,type:'fill',prompt:'Complete o operador para calcular o subtotal do pedido.',code:'quantidade = 3\npreco = 8\nsubtotal = quantidade {{gap}} preco\nprint(subtotal)  # 24',answers:['*'],explain:'Em Python, o operador de multiplicação é *.'},
+    // 03 DECISÕES
+    {stage:2,type:'choice',prompt:'Para aprovar somente quem tem nota ≥ 7 E frequência ≥ 75%, qual condição é correta em Python?',options:['nota >= 7 or frequencia >= 75','nota >= 7 and frequencia >= 75','nota < 7 and frequencia >= 75','nota == 7 or frequencia == 75'],answer:1,explain:'and exige que as duas condições sejam verdadeiras. or permite que pelo menos uma seja verdadeira.'},
+    {stage:2,type:'fill',prompt:'Complete a condição que permite entrar quando a idade for pelo menos 18.',code:'idade = 18\nif idade {{gap}} 18:\n    print("Entrada permitida")',answers:['>=','=>'],canonical:'>=',explain:'O operador >= significa maior ou igual. Em Python, a forma válida é >=, não =>.'},
+    {stage:2,type:'match',prompt:'Relacione cada operador lógico ao significado correto.',pairs:[['E / and','As duas condições precisam ser verdadeiras'],['OU / or','Basta pelo menos uma condição verdadeira'],['NÃO / not','Inverte o valor lógico de uma condição']],explain:'E, OU e NÃO são fundamentais para combinar decisões.'},
+    {stage:2,type:'choice',prompt:'O que aparece na tela ao executar o código?',code:'numero = 5\nif numero % 2 == 0:\n    print("par")\nelse:\n    print("ímpar")',options:['par','ímpar','5','Erro porque % não existe'],answer:1,explain:'5 dividido por 2 deixa resto 1, então a condição % 2 == 0 é falsa e o else executa.'},
+    // 04 REPETIÇÃO
+    {stage:3,type:'choice',prompt:'O que pode acontecer em um while se a variável de controle nunca for atualizada?',options:['O laço pode repetir indefinidamente.','O Python sempre corrige a variável.','O laço necessariamente executa uma vez.','A condição vira falsa automaticamente.'],answer:0,explain:'Se a condição permanecer verdadeira, o laço pode se tornar infinito. O contador precisa avançar ou haver outra condição de saída.'},
+    {stage:3,type:'fill',prompt:'Complete a função utilizada no laço para imprimir os números de 1 a 5.',code:'for numero in {{gap}}(1, 6):\n    print(numero)',answers:['range'],explain:'range(1,6) gera 1, 2, 3, 4 e 5. O limite final não é incluído.'},
+    {stage:3,type:'order',prompt:'Coloque as linhas na sequência certa para imprimir 1, 2 e 3.',blocks:['contador = 1','while contador <= 3:','    print(contador)','    contador += 1'],initial:[1,2,0,3],explain:'Primeiro inicializamos o contador, depois testamos a condição. Dentro do while imprimimos e incrementamos.'},
+    {stage:3,type:'choice',prompt:'Quais números são exibidos pelo código?',code:'for n in range(2, 10, 2):\n    print(n)',options:['2, 4, 6, 8','2, 4, 6, 8, 10','1, 3, 5, 7, 9','2, 3, 4, 5, 6, 7, 8, 9'],answer:0,explain:'range(início, limite, passo) começa em 2, avança de 2 em 2 e não inclui 10.'},
+    // 05 VETORES E MATRIZES
+    {stage:4,type:'choice',prompt:'Qual valor será impresso?',code:'notas = [10, 20, 30]\nprint(notas[1])',options:['10','20','30','Erro, porque começa em 1'],answer:1,explain:'Em Python, o primeiro elemento está no índice 0. notas[1] é o segundo elemento: 20.'},
+    {stage:4,type:'fill',prompt:'Complete o índice para imprimir o último valor da lista.',code:'numeros = [3, 5, 7]\nprint(numeros[{{gap}}])  # Deve mostrar 7',answers:['2'],explain:'O vetor possui índices 0, 1 e 2. O índice 2 aponta para 7.'},
+    {stage:4,type:'match',prompt:'Associe os conceitos de coleção de dados.',pairs:[['Vetor','Coleção em uma dimensão'],['Matriz','Coleção organizada em linhas e colunas'],['Índice','Posição utilizada para acessar um elemento']],explain:'Vetores são unidimensionais; matrizes possuem duas dimensões; índices identificam posições.'},
+    {stage:4,type:'choice',prompt:'Uma matriz com 2 linhas e 3 colunas contém quantos elementos?',options:['5','6','8','9'],answer:1,explain:'Multiplicamos linhas por colunas: 2 × 3 = 6 elementos. Dois laços aninhados podem percorrê-la.'},
+    // 06 FUNÇÕES E RECURSIVIDADE
+    {stage:5,type:'choice',prompt:'Qual é a principal função de return dentro de uma função Python?',options:['Mostrar automaticamente o resultado na tela.','Repetir o código para sempre.','Devolver um valor a quem chamou a função.','Criar uma variável global obrigatória.'],answer:2,explain:'return devolve um resultado ao ponto de chamada. print() apenas exibe valores.'},
+    {stage:5,type:'fill',prompt:'Complete a função que devolve o dobro do número recebido.',code:'def dobro(n):\n    {{gap}} n * 2\n\nprint(dobro(4))  # 8',answers:['return'],explain:'return n * 2 permite que a chamada dobro(4) produza o valor 8.'},
+    {stage:5,type:'match',prompt:'Associe os conceitos de recursividade.',pairs:[['Caso base','Condição que encerra as chamadas'],['Passo recursivo','Função chama a si mesma com um problema menor'],['Retorno','Valor entregue ao concluir uma chamada']],explain:'Uma boa recursão tem caso base e aproxima o problema desse caso a cada chamada.'},
+    {stage:5,type:'choice',prompt:'Qual é o resultado de fatorial(4) se 4! = 4 × 3 × 2 × 1?',options:['4','10','16','24'],answer:3,explain:'4 × 3 × 2 × 1 = 24. O fatorial é um exemplo clássico de recursividade.'},
+    // 07 FILAS
+    {stage:6,type:'choice',prompt:'Em uma fila FIFO, qual elemento deve sair primeiro?',options:['O último que entrou.','O que tiver maior valor.','O primeiro que entrou.','Um elemento sorteado.'],answer:2,explain:'FIFO significa First In, First Out: primeiro a entrar, primeiro a sair.'},
+    {stage:6,type:'order',prompt:'Organize uma sequência lógica de atendimento em uma fila FIFO.',blocks:['Inserir Ana na fila.','Inserir Bruno na fila.','Remover o primeiro elemento da fila.','Ana é atendida primeiro.'],initial:[1,2,3,0],explain:'Ana entra antes de Bruno. Ao remover o primeiro item, quem sai é Ana.'},
+    {stage:6,type:'fill',prompt:'Complete o método Python que remove o primeiro item da lista usada como uma fila simples.',code:'fila = ["Ana", "Bruno"]\nprimeiro = fila.{{gap}}(0)\nprint(primeiro)  # Ana',answers:['pop'],explain:'pop(0) remove e devolve o elemento na posição 0. Em filas grandes, collections.deque é mais eficiente.'},
+    {stage:6,type:'match',prompt:'Relacione as operações comuns de uma fila.',pairs:[['Enqueue','Inserir elemento no final'],['Dequeue','Remover elemento do início'],['Peek / consultar','Observar o primeiro elemento sem removê-lo']],explain:'Inserir, remover e consultar são operações básicas de filas.'},
+    // 08 ORDENAÇÃO
+    {stage:7,type:'choice',prompt:'Qual ideia está por trás do Bubble Sort?',options:['Comparar elementos vizinhos e trocá-los quando necessário.','Escolher números aleatórios até ficar certo.','Sempre remover o primeiro elemento.','Dividir necessariamente a lista em várias metades.'],answer:0,explain:'Bubble Sort percorre a lista comparando vizinhos e fazendo trocas até ordená-la.'},
+    {stage:7,type:'order',prompt:'Coloque as etapas do Merge Sort em ordem.',blocks:['Dividir a lista em partes menores.','Ordenar recursivamente cada parte.','Mesclar as partes em ordem.'],initial:[2,0,1],explain:'Merge Sort divide, resolve as partes e depois mescla os resultados ordenados.'},
+    {stage:7,type:'fill',prompt:'Complete o método usado para acrescentar um elemento ao resultado da mesclagem.',code:'resultado = []\nesquerda = [2, 5]\ni = 0\nresultado.{{gap}}(esquerda[i])  # [2]',answers:['append'],explain:'append(valor) adiciona um novo elemento ao final de uma lista Python.'},
+    {stage:7,type:'choice',prompt:'Em listas grandes, qual alternativa descreve corretamente as complexidades típicas?',options:['Bubble Sort e Merge Sort: ambos O(1).','Bubble Sort: O(n log n); Merge Sort: O(n²).','Bubble Sort: O(n²); Merge Sort: O(n log n).','Os dois sempre fazem exatamente as mesmas comparações.'],answer:2,explain:'No caso médio e no pior caso, Bubble Sort costuma ser O(n²), enquanto Merge Sort é O(n log n).'},
+    // 09 PYTHON E JOGOS
+    {stage:8,type:'choice',prompt:'Em Python, o que random.randint(1, 10) pode produzir?',options:['Somente 1.','Um inteiro de 1 até 10, incluindo os extremos.','Somente 10.','Qualquer número decimal de 1 até 10.'],answer:1,explain:'randint(a,b) escolhe um inteiro aleatório de a até b, incluindo a e b.'},
+    {stage:8,type:'fill',prompt:'No jogo de adivinhação, complete a conversão do palpite digitado.',code:'palpite = {{gap}}(input("Qual é o número? "))',answers:['int'],explain:'int() transforma o texto digitado em um número inteiro que poderá ser comparado ao número secreto.'},
+    {stage:8,type:'match',prompt:'Associe cada recurso Python ao seu uso.',pairs:[['input()','Ler uma resposta digitada pelo usuário'],['print()','Exibir algo na tela'],['len()','Descobrir a quantidade de itens de uma coleção']],explain:'input lê dados, print escreve resultados e len informa quantos elementos uma coleção contém.'},
+    {stage:8,type:'choice',prompt:'Em um jogo de adivinhação, o número secreto é 8 e o palpite é 5. O que o programa deve informar?',code:'secreto = 8\npalpite = 5\nif palpite < secreto:\n    print("Tente um número maior")',options:['Tente um número menor.','Você acertou.','Tente um número maior.','O programa não mostra nada.'],answer:2,explain:'O palpite 5 é menor que 8. A dica correta é tentar um número maior.'},
+    // 10 GITHUB E APIs
+    {stage:9,type:'choice',prompt:'Qual é a diferença entre Git e GitHub?',options:['Git controla versões; GitHub hospeda e compartilha repositórios Git.','Git é o site; GitHub é uma linguagem de programação.','Git e GitHub só funcionam com Python.','Não existe diferença, são sinônimos exatos.'],answer:0,explain:'Git é o sistema de controle de versões. GitHub é a plataforma de hospedagem e colaboração.'},
+    {stage:9,type:'choice',prompt:'Você quer uma cópia do projeto do professor na sua conta. Qual recurso usa?',options:['Delete repository.','Fork.','Sign out.','Issues close.'],answer:1,explain:'Fork cria uma cópia vinculada ao repositório de origem em sua conta, permitindo modificar sua versão.'},
+    {stage:9,type:'match',prompt:'Associe os recursos do GitHub à finalidade.',pairs:[['Commit','Registrar uma alteração no histórico'],['README.md','Explicar o projeto para quem o acessa'],['Pull Request','Propor integração de mudanças para revisão']],explain:'Commits registram versões; READMEs documentam projetos; Pull Requests permitem revisar e integrar mudanças.'},
+    {stage:9,type:'fill',prompt:'Uma API retorna um objeto JSON como {"name":"pikachu"}. Complete a chave para acessar o nome.',code:'dados = {"name": "pikachu"}\nprint(dados["{{gap}}"] )  # pikachu',answers:['name'],explain:'JSON organiza informações em pares de chave e valor. Aqui a chave é name. Em Python, um dicionário permite acessar dados["name"].'}
+  ];
+
+  const KEY='missao_codigo_logica_2026_v1';
+  const MOCK_CLASS=[42,46,50,51,53,55,57,59,60,61,63,64,65,67,68,69,70,71,72,73,74,75,77,78,79,81,83,85,87,90,92,95];
+  const MAX_POINTS=QUESTION_BANK.length*25;
+  const byId=id=>document.getElementById(id);
+  let state=null,activeResponse=null;
+  const mean=Math.round(MOCK_CLASS.reduce((sum,n)=>sum+n,0)/MOCK_CLASS.length);
+  const stageCount=MISSIONS.length;
+  const show=id=>{['introScreen','quizScreen','resultScreen'].forEach(screen=>byId(screen).classList.toggle('hidden',screen!==id));window.scrollTo({top:0,behavior:'auto'});};
+  function escapeHTML(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(err){console.warn('O navegador não permitiu salvar a atividade.',err);}}
+  function restore(){try{const old=JSON.parse(localStorage.getItem(KEY));if(old&&typeof old.name==='string'&&Number.isInteger(old.qIndex)&&old.answers&&typeof old.answers==='object'&&old.qIndex>=0&&old.qIndex<=QUESTION_BANK.length)return old;}catch(err){console.warn('Sem progresso anterior.',err);}return null;}
+  function reset(){if(!confirm('Apagar o progresso salvo neste navegador e começar do zero?'))return;try{localStorage.removeItem(KEY);}catch(err){}state=null;activeResponse=null;byId('studentName').value='';renderIntro();show('introScreen');}
+  function gradeStats(){let points=0,graded=0,perfect=0;for(let i=0;i<QUESTION_BANK.length;i++){const item=state?.answers?.[i];if(item?.graded){graded++;points+=item.earned;if(item.earned===25)perfect++;}}return {points,graded,perfect,percent:Math.round(100*points/MAX_POINTS)};}
+  function stagePercent(stage){let n=0;for(let i=0;i<QUESTION_BANK.length;i++)if(QUESTION_BANK[i].stage===stage)n+=state?.answers?.[i]?.earned||0;return Math.round(n/(QUESTION_BANK.filter(q=>q.stage===stage).length*25)*100);}
+  function renderStages(target,highlight){byId(target).innerHTML=MISSIONS.map((s,i)=>{const count=QUESTION_BANK.filter(q=>q.stage===i).length;let completed=0;if(state)QUESTION_BANK.forEach((q,idx)=>{if(q.stage===i&&state.answers[idx]?.graded)completed++;});return `<div class="stage ${highlight===i?'active':''} ${completed===count?'complete':''}"><div class="num">${completed===count?'✓':'NÍVEL '+String(i+1).padStart(2,'0')}</div><div class="stage-title">${escapeHTML(s.title)}</div><div class="stage-count">${completed}/${count} desafios</div></div>`;}).join('');}
+  function renderIntro(){state=restore();byId('studentName').value=state?.name||'';byId('startBtn').textContent=state?(state.qIndex>=QUESTION_BANK.length?'VER MEU RESULTADO →':'CONTINUAR MISSÃO →'):'COMEÇAR MISSÃO →';byId('resetIntroBtn').classList.toggle('hidden',!state);byId('resumeMessage').textContent=state?`Progresso encontrado: ${gradeStats().graded}/${QUESTION_BANK.length} desafios respondidos neste navegador.`:'Sua pontuação é salva neste navegador, para você poder continuar depois.';renderStages('introStages',-1);byId('headerStatus').textContent='● TREINAMENTO';}
+  function begin(){const name=byId('studentName').value.trim().replace(/\s+/g,' ');if(!name){byId('studentName').focus();byId('studentName').setCustomValidity('Informe um nome ou apelido.');byId('studentName').reportValidity();return;}byId('studentName').setCustomValidity('');if(!state){state={name,qIndex:0,answers:{},startedAt:new Date().toISOString()};}else state.name=name;save();if(state.qIndex>=QUESTION_BANK.length)renderResult();else renderQuestion();}
+  function defaultResponse(q){if(q.type==='choice')return null;if(q.type==='fill')return '';if(q.type==='match')return q.pairs.map(()=> '');if(q.type==='order')return q.initial.slice();return null;}
+  function currentQuestion(){return QUESTION_BANK[state.qIndex];}
+  function codeHTML(code){return `<pre class="code">${escapeHTML(code).replace('{{gap}}','<span class="gap">????</span>')}</pre>`;}
+  function isAnswered(q,ans){if(q.type==='choice')return Number.isInteger(ans);if(q.type==='fill')return Boolean(String(ans).trim());if(q.type==='match')return Array.isArray(ans)&&ans.length===q.pairs.length&&ans.every(x=>x!==''&&Number.isInteger(Number(x)));if(q.type==='order')return Array.isArray(ans)&&ans.length===q.blocks.length;return false;}
+  function solutionText(q){if(q.type==='choice')return String.fromCharCode(65+q.answer)+') '+q.options[q.answer];if(q.type==='fill')return q.canonical||q.answers[0];if(q.type==='match')return q.pairs.map(p=>`${p[0]} → ${p[1]}`).join(' | ');if(q.type==='order')return q.blocks.map((str,i)=>`${i+1}. ${str.trim()}`).join('\n');return '';}
+  function evaluation(q,ans){if(q.type==='choice')return ans===q.answer?25:0;
+    if(q.type==='fill'){const norm=s=>String(s).trim().replace(/\s+/g,'').toLowerCase();return q.answers.some(a=>norm(ans)===norm(a))?25:0;}
+    if(q.type==='match')return Math.round(q.pairs.reduce((sum,p,i)=>sum+(Number(ans[i])===i?1:0),0)*25/q.pairs.length);
+    if(q.type==='order')return Math.round(ans.reduce((sum,n,i)=>sum+(n===i?1:0),0)*25/q.blocks.length);
+    return 0;
+  }
+  function renderQuestion(){const i=state.qIndex;if(i>=QUESTION_BANK.length){renderResult();return;}
+    const q=currentQuestion(),completed=state.answers[i]?.graded,st=gradeStats();activeResponse=completed?structuredClone(state.answers[i].response):defaultResponse(q);
+    byId('headerStatus').textContent='● MISSÃO EM ANDAMENTO';byId('stageLabel').textContent=`MISSÃO ${String(q.stage+1).padStart(2,'0')} / ${String(stageCount).padStart(2,'0')}`;
+    byId('stageHeading').textContent=MISSIONS[q.stage].title;byId('questionCounter').textContent=`Desafio ${i+1} de ${QUESTION_BANK.length}`;
+    byId('questionCountNote').textContent=`${st.graded} corrigidos · Cada desafio vale até 25 XP · Sem penalidade adicional por erro`;
+    byId('progressTrack').setAttribute('aria-valuenow',st.graded);byId('progressFill').style.width=`${st.graded/QUESTION_BANK.length*100}%`;
+    byId('currentXP').textContent=st.points;byId('currentCorrect').textContent=st.perfect;
+    const labels={choice:'ESCOLHA A ALTERNATIVA',fill:'COMPLETE O CÓDIGO',match:'LIGUE OS CONCEITOS',order:'ORGANIZE OS BLOCOS'};
+    byId('questionType').textContent=`${MISSIONS[q.stage].icon}  ${labels[q.type]}`;
+    byId('questionPrompt').textContent=q.prompt;
+    byId('questionHint').textContent=q.type==='order'?'Use as setas para mover os blocos. A ordem da execução importa.':q.type==='match'?'Escolha, para cada item, a definição correta.':q.type==='fill'?'Digite somente a palavra, o símbolo ou o número que está faltando.':'Escolha apenas uma alternativa.';
+    let content=q.code?codeHTML(q.code):'';
+    if(q.type==='choice')content+=`<div class="choices">${q.options.map((opt,j)=>`<button type="button" class="choice ${activeResponse===j?'selected':''} ${completed&&j===q.answer?'correct':''} ${completed&&j===activeResponse&&j!==q.answer?'wrong':''}" data-choice="${j}" ${completed?'disabled':''} aria-pressed="${activeResponse===j}"><span class="choice-key">${String.fromCharCode(65+j)}</span><span>${escapeHTML(opt)}</span></button>`).join('')}</div>`;
+    if(q.type==='fill')content+=`<div class="fill-wrap"><label class="field" for="codeAnswer">Sua resposta<input class="answer-input" id="codeAnswer" autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off" placeholder="Digite o trecho ausente" value="${escapeHTML(activeResponse)}" ${completed?'disabled':''}></label></div>`;
+    if(q.type==='match'){const choices=q.pairs.map(p=>p[1]);const order=choices.length===3?[1,2,0]:choices.map((_,k)=>k).reverse();content+=`<div class="match-rows">${q.pairs.map((p,j)=>`<div class="match-row"><div class="match-left">${escapeHTML(p[0])}</div><div class="match-right"><select class="match-select" data-match="${j}" aria-label="Definição de ${escapeHTML(p[0])}" ${completed?'disabled':''}><option value="">Selecione a definição</option>${order.map(k=>`<option value="${k}" ${String(activeResponse[j])===String(k)?'selected':''}>${escapeHTML(choices[k])}</option>`).join('')}</select>${completed?`<span class="match-mark">${Number(activeResponse[j])===j?'✓':'✕'}</span>`:''}</div></div>`).join('')}</div>`;}
+    if(q.type==='order')content+=`<div class="reorder-list">${activeResponse.map((n,j)=>`<div class="reorder-row"><span class="reorder-n">${j+1}.</span><span class="reorder-text">${escapeHTML(q.blocks[n])}</span><div class="arrows"><button type="button" data-move="${j}" data-dir="-1" aria-label="Mover bloco ${j+1} para cima" ${completed||j===0?'disabled':''}>↑</button><button type="button" data-move="${j}" data-dir="1" aria-label="Mover bloco ${j+1} para baixo" ${completed||j===activeResponse.length-1?'disabled':''}>↓</button></div></div>`).join('')}</div>`;
+    byId('answerZone').innerHTML=content;
+    byId('feedbackZone').innerHTML='';
+    byId('gradeBtn').classList.toggle('hidden',Boolean(completed));byId('nextBtn').classList.toggle('hidden',!completed);byId('nextBtn').textContent=i===QUESTION_BANK.length-1?'VER MEU RESULTADO →':QUESTION_BANK[i+1]?.stage!==q.stage?'PRÓXIMA MISSÃO →':'PRÓXIMO DESAFIO →';
+    if(completed)renderFeedback(q,state.answers[i].earned);
+    if(!completed)bindAnswers(q);
+    byId('gradeBtn').disabled=!isAnswered(q,activeResponse);
+    show('quizScreen');
+  }
+  function bindAnswers(q){const zone=byId('answerZone');if(q.type==='choice')zone.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{activeResponse=Number(b.dataset.choice);zone.querySelectorAll('[data-choice]').forEach(x=>{const chosen=Number(x.dataset.choice)===activeResponse;x.classList.toggle('selected',chosen);x.setAttribute('aria-pressed',chosen);});byId('gradeBtn').disabled=false;}));
+    if(q.type==='fill'){const input=byId('codeAnswer');input.addEventListener('input',()=>{activeResponse=input.value;byId('gradeBtn').disabled=!isAnswered(q,activeResponse);});input.addEventListener('keydown',e=>{if(e.key==='Enter'&&isAnswered(q,activeResponse))grade();});}
+    if(q.type==='match')zone.querySelectorAll('[data-match]').forEach(select=>select.addEventListener('change',()=>{activeResponse[Number(select.dataset.match)]=select.value===''?'':Number(select.value);byId('gradeBtn').disabled=!isAnswered(q,activeResponse);}));
+    if(q.type==='order')zone.querySelectorAll('[data-move]').forEach(btn=>btn.addEventListener('click',()=>{const index=Number(btn.dataset.move),delta=Number(btn.dataset.dir),next=index+delta;[activeResponse[index],activeResponse[next]]=[activeResponse[next],activeResponse[index]];refreshOrder(q);}));
+  }
+  function refreshOrder(q){const zone=byId('answerZone');zone.innerHTML=`<div class="reorder-list">${activeResponse.map((n,j)=>`<div class="reorder-row"><span class="reorder-n">${j+1}.</span><span class="reorder-text">${escapeHTML(q.blocks[n])}</span><div class="arrows"><button type="button" data-move="${j}" data-dir="-1" aria-label="Mover bloco ${j+1} para cima" ${j===0?'disabled':''}>↑</button><button type="button" data-move="${j}" data-dir="1" aria-label="Mover bloco ${j+1} para baixo" ${j===activeResponse.length-1?'disabled':''}>↓</button></div></div>`).join('')}</div>`;bindAnswers(q);}
+  function grade(){const q=currentQuestion();if(state.answers[state.qIndex]?.graded||!isAnswered(q,activeResponse))return;
+    const earned=evaluation(q,activeResponse);state.answers[state.qIndex]={response:structuredClone(activeResponse),earned,graded:true};save();renderQuestion();byId('feedbackZone').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  function renderFeedback(q,earned){const kind=earned===25?'good':earned>0?'mid':'bad';const heading=earned===25?'Mandou bem! Resposta correta.':earned>0?'Quase lá! Você acertou uma parte.':'Essa ainda precisa de atenção.';
+    byId('feedbackZone').innerHTML=`<div class="feedback ${kind}"><div class="feedback-title">${earned===25?'✓':earned>0?'◐':'↺'} ${heading}</div><div class="score-line">+${earned} de 25 XP neste desafio</div><p>${escapeHTML(q.explain)}</p><div class="solution"><strong>Resposta esperada:</strong> ${escapeHTML(solutionText(q))}</div></div>`;
+  }
+  function next(){if(!state.answers[state.qIndex]?.graded)return;state.qIndex++;save();if(state.qIndex>=QUESTION_BANK.length)renderResult();else renderQuestion();}
+  function motivationalMessage(p){if(p>=90)return'Excelente domínio dos conteúdos. Seu próximo passo é criar problemas novos e explicar a solução para alguém.';if(p>=75)return'Muito bom! Você já domina boa parte dos assuntos. Revise os pequenos pontos que faltaram.';if(p>=60)return'Boa evolução! Você consolidou várias ideias e já sabe exatamente o que reforçar.';if(p>=40)return'Você está construindo a base. Volte aos comentários das respostas e tente outra rodada depois.';return'Todo programador começa praticando. Refaça os exercícios com calma, um conceito por vez.';}
+  function resultText(){const s=gradeStats();const rank=1+MOCK_CLASS.filter(score=>score>s.percent).length;const lines=[`MISSÃO CÓDIGO | Comprovante de revisão`,`Aluno(a): ${state.name}`,`Data: ${new Date().toLocaleDateString('pt-BR')}`,`Resultado: ${s.points}/${MAX_POINTS} XP (${s.percent}%)`,`Questões totalmente corretas: ${s.perfect}/${QUESTION_BANK.length}`,`Posição simulada: ${rank}º de ${MOCK_CLASS.length+1}`,`Média da turma fictícia: ${mean}%`,`ATENÇÃO: A posição e a média são simulações, não dados reais dos colegas.`,``, `Desempenho por missão:`];MISSIONS.forEach((m,i)=>lines.push(`- ${m.title}: ${stagePercent(i)}%`));return lines.join('\n');}
+  function renderResult(){const s=gradeStats();if(s.graded<QUESTION_BANK.length){renderQuestion();return;}
+    const rank=1+MOCK_CLASS.filter(score=>score>s.percent).length;const p=s.percent;
+    byId('finalGreeting').textContent=`Missão cumprida, ${state.name}!`;
+    byId('finalMessage').textContent=motivationalMessage(p);byId('finalScore').textContent=s.points;byId('finalPercent').textContent=`${p}% de aproveitamento · ${s.perfect} desafios totalmente corretos de ${QUESTION_BANK.length}`;
+    byId('yourPercent').textContent=`${p}%`;byId('fakeAverage').textContent=`${mean}%`;byId('fakeRank').textContent=`${rank}º / ${MOCK_CLASS.length+1}`;
+    byId('yourBar').style.width=p+'%';byId('fakeBar').style.width=mean+'%';byId('yourBarLabel').textContent=p+'%';byId('fakeBarLabel').textContent=mean+'%';
+    byId('simulationExplanation').textContent=`Comparação apenas ilustrativa: posição ${rank}º entre você e ${MOCK_CLASS.length} pontuações INVENTADAS, com média de ${mean}%. Nenhum resultado real da turma foi usado ou coletado. O ranking não tem valor avaliativo.`;
+    byId('stageResults').innerHTML=MISSIONS.map((m,i)=>{const percent=stagePercent(i);return `<div class="result-stage"><div class="caption">MISSÃO ${String(i+1).padStart(2,'0')}</div><strong>${escapeHTML(m.title)}</strong><div class="caption">${percent}% de aproveitamento</div><div class="mini-track"><div style="width:${percent}%"></div></div></div>`;}).join('');
+    byId('copyStatus').textContent='';byId('headerStatus').textContent='★ CONCLUÍDA';show('resultScreen');}
+  async function copyResult(){const t=resultText();try{await navigator.clipboard.writeText(t);byId('copyStatus').textContent='Comprovante copiado. Cole no ambiente de entrega da atividade.';}catch(err){const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();byId('copyStatus').textContent=ok?'Comprovante copiado.':'Se a cópia falhou, use o botão para baixar o TXT.';}}
+  function downloadResult(){const blob=new Blob([resultText()],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='resultado-missao-codigo.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+  byId('startBtn').addEventListener('click',begin);byId('studentName').addEventListener('keydown',e=>{if(e.key==='Enter')begin();});byId('studentName').addEventListener('input',e=>e.target.setCustomValidity(''));
+  byId('resetIntroBtn').addEventListener('click',reset);byId('restartBtn').addEventListener('click',reset);
+  byId('homeBtn').addEventListener('click',()=>{save();renderIntro();show('introScreen');});byId('gradeBtn').addEventListener('click',grade);byId('nextBtn').addEventListener('click',next);
+  byId('copyResultBtn').addEventListener('click',copyResult);byId('downloadResultBtn').addEventListener('click',downloadResult);
+  if(QUESTION_BANK.length!==40||QUESTION_BANK.some((q,i)=>q.stage!==Math.floor(i/4))){console.error('O banco precisa ter 40 questões, 4 em cada missão.');}
+  renderIntro();
+  </script>
+</body>
+</html>
