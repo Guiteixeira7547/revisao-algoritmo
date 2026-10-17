@@ -1,4 +1,4 @@
-# Missão Código - Revisão de Lógica de Programação
+# Missão Código - Revisão de Lógica de Programação-Guilherme Teixeira
 
 Atividade online **autocorrigível** para revisão das aulas 01 a 10, desenvolvida com HTML, CSS e JavaScript. O site é estático, funciona no GitHub Pages e não precisa de banco de dados ou bibliotecas externas.
 
